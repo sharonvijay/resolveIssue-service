@@ -25,7 +25,7 @@ public class ResolveIssueController {
     @Autowired
     private IResolveIssueService resolveIssueService;
 
-    @GetMapping("/acceptIssue")
+    @PostMapping("/acceptIssue")
     public ResponseEntity<AcceptIssueDto> acceptIssue(@RequestBody IssueResolve issueResolve) {
         Optional<Issue> optionalIssue = issueRepo.findById(issueResolve.getIssueId());
         Optional<Admin> optionalAdmin = adminRepo.findById(issueResolve.getAdminId());
@@ -57,7 +57,7 @@ public class ResolveIssueController {
         return ResponseEntity.ok(status);
     }
 
-    @GetMapping("/resolveIssue")
+    @PostMapping("/resolveIssue")
     public ResponseEntity<ResolveIssueDto> resolveIssue(@RequestBody IssueResolve issueResolve)
     {
         Optional<Issue> optionalIssue = issueRepo.findById(issueResolve.getIssueId());
@@ -92,6 +92,12 @@ public class ResolveIssueController {
     public List<Issue> getAllIssues()
     {
         return resolveIssueService.getAllIssue();
+    }
+
+    @GetMapping("/getAllUserIssues/{userId}")
+    public List<Issue> getAllUserIssues(@PathVariable Long userId)
+    {
+        return resolveIssueService.getAllUserIssue(userId);
     }
 
     @GetMapping("/getIssue/{id}")

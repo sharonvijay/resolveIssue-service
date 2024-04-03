@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface IResolveIssueService {
     public List<Issue> getAllIssue();
+    public List<Issue> getAllUserIssue(Long userId);
     public Issue getIssueById(Long id);
     public void acceptIssue(Issue issue);
 
